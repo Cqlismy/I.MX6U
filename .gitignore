@@ -1,0 +1,8 @@
+# 
+# .gitignore file
+#
+
+*.o
+*.elf
+*.bin
+*.dis
