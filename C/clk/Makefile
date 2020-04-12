@@ -1,5 +1,5 @@
 CROSS_COMPILE	?= arm-linux-gnueabihf-
-TARGET			?= bsp
+TARGET			?= clk
 
 CC				:= $(CROSS_COMPILE)gcc
 LD				:= $(CROSS_COMPILE)ld

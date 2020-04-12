@@ -9,8 +9,8 @@ void led_init(void)
 {
     gpio_pin_config_t led_config;
 
-    /* 设置IO口复用模式为GPIO */
-    IOMUXC_SetPinMux(IOMUXC_GPIO1_IO07_GPIO1_IO07, 0);
+    /* 设置CSI_DATA00引脚IO复用为GPIO4_IO21 */
+    IOMUXC_SetPinMux(IOMUXC_CSI_DATA00_GPIO4_IO21, 0);
 
     /* 配置GPIO1_IO08引脚电气属性 
      * bit [16]: 0 关闭HYS
@@ -22,12 +22,12 @@ void led_init(void)
      * bit [5:3]: 110 驱动能力为R0/6
      * bit [0]: 0 低摆率
      */
-    IOMUXC_SetPinConfig(IOMUXC_GPIO1_IO07_GPIO1_IO07, 0x10b0);
+    IOMUXC_SetPinConfig(IOMUXC_CSI_DATA00_GPIO4_IO21, 0x10b0);
 
     /* 将按键相关的GPIO方向设置为输入 */
     led_config.direction = kGPIO_DigitalOutput;
-    led_config.value = OFF;
-    gpio_init(GPIO1, 7, &led_config);
+    led_config.value = 1;   /* 初始状态熄灭LED灯 */
+    gpio_init(GPIO4, 21, &led_config);
 }
 
 /**
@@ -38,8 +38,8 @@ void led_init(void)
  */
 void led_switch(int status)
 {
-    if(status == OFF)
-        gpio_pin_write(GPIO1, 7, OFF);
+    if(status == ON)
+        gpio_pin_write(GPIO4, 21, 0);   /* 输出低电平点亮LED */
     else
-        gpio_pin_write(GPIO1, 7, ON);
+        gpio_pin_write(GPIO4, 21, 1);   /* 输出高电平熄灭LED */
 }

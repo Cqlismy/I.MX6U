@@ -9,8 +9,8 @@ void key_init(void)
 {
     gpio_pin_config_t key_config;
 
-    /* 设置IO口复用模式为GPIO */
-    IOMUXC_SetPinMux(IOMUXC_GPIO1_IO08_GPIO1_IO08, 0);
+    /* 设置CSI_DATA01引脚IO口复用为GPIO4_IO22 */
+    IOMUXC_SetPinMux(IOMUXC_CSI_DATA01_GPIO4_IO22, 0);
 
     /* 配置GPIO1_IO08引脚电气属性 
      * bit [16]: 0 关闭HYS
@@ -23,11 +23,11 @@ void key_init(void)
      * bit [5:3]: 000 关闭输出
      * bit [0]: 0 低摆率
      */
-    IOMUXC_SetPinConfig(IOMUXC_GPIO1_IO08_GPIO1_IO08, 0xF080);
+    IOMUXC_SetPinConfig(IOMUXC_CSI_DATA01_GPIO4_IO22, 0xF080);
 
     /* 将按键相关的GPIO方向设置为输入 */
     key_config.direction = kGPIO_DigitalInput;
-    gpio_init(GPIO1, 8, &key_config);
+    gpio_init(GPIO4, 22, &key_config);
 }
 
 /**
@@ -40,12 +40,13 @@ int key_get_value(void)
     int ret = KEY_NONE;
     static unsigned char release = 1; /* 表示按键处于释放状态 */
 
-    if ((release == 1) && (gpio_pin_read(GPIO1, 8) == 0)) { /* 按键按下 */
+    if ((release == 1) && (gpio_pin_read(GPIO4, 22) == 0)) { /* 按键按下 */
         delay(10);
-        release = 0;
-        if (gpio_pin_read(GPIO1, 8) == 0)
+        if (gpio_pin_read(GPIO4, 22) == 0) {
+            release = 0;
             ret = KEY0_VALUE;
-    } else if (gpio_pin_read(GPIO1, 8) == 1) { /* 按键未按下 */
+        }
+    } else if (gpio_pin_read(GPIO4, 22) == 1) { /* 按键未按下 */
         ret = KEY_NONE;
         release = 1; /* 标记按键处于释放状态 */
     }
