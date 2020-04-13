@@ -3,7 +3,7 @@
 #include "bsp_gpio.h"
 
 /**
- * myapp() - 主函数
+ * main() - 主函数
  */
 int main(void)
 {

@@ -1,17 +1,19 @@
-#include "app.h"
+#include "fsl_common.h"
+#include "fsl_iomuxc.h"
+#include "MCIMX6G2.h"
 
 /**
  * clk_enable() - 使能SoC上所有外设时钟 
  */
 void clk_enable(void)
 {
-    CCM_CCGR0 = 0xffffffff;
-    CCM_CCGR1 = 0xffffffff;
-    CCM_CCGR2 = 0xffffffff;
-    CCM_CCGR3 = 0xffffffff;
-    CCM_CCGR4 = 0xffffffff;
-    CCM_CCGR5 = 0xffffffff;
-    CCM_CCGR6 = 0xffffffff;
+    CCM->CCGR0 = 0xffffffff;
+    CCM->CCGR1 = 0xffffffff;
+    CCM->CCGR2 = 0xffffffff;
+    CCM->CCGR3 = 0xffffffff;
+    CCM->CCGR4 = 0xffffffff;
+    CCM->CCGR5 = 0xffffffff;
+    CCM->CCGR6 = 0xffffffff;
 }
 
 /**
@@ -19,10 +21,10 @@ void clk_enable(void)
  */
 void gpio_init(void)
 {
-    /* 设置IO口复用模式为GPIO */
-    SW_MUX_CTL_PAD_GPIO1_IO08 = 0x5;
+    /* 设置CSI_DATA00引脚IO复用为GPIO4_IO21 */
+    IOMUXC_SetPinMux(IOMUXC_CSI_DATA00_GPIO4_IO21, 0);
 
-    /* 配置GPIO1_IO08引脚电气属性 
+    /* 配置GPIO4_IO21引脚电气属性 
      * bit [16]: 0 关闭HYS
      * bit [15:14]: 00 默认下拉
      * bit [13]: 0 keeper
@@ -32,13 +34,13 @@ void gpio_init(void)
      * bit [5:3]: 110 驱动能力为R0/6
      * bit [0]: 0 低摆率
      */
-    SW_PAD_CTL_PAD_GPIO1_IO08 = 0x10b0;
+    IOMUXC_SetPinConfig(IOMUXC_CSI_DATA00_GPIO4_IO21, 0x10b0);
 
     /* 设置GPIO的方向为输出 */
-    GPIO1_GDIR = 0x00000100;
+    GPIO4->GDIR |= (1 << 21);
 
     /* 设置GPIO1_IO08引脚输出高电平 */
-    GPIO1_DR = 0x00000100;
+    GPIO4->DR |= (1 << 21);
 }
 
 /**
@@ -46,7 +48,7 @@ void gpio_init(void)
  */
 void gpio_output_low(void)
 {
-    GPIO1_DR &= ~(0x1 << 8);
+    GPIO4->DR &= ~(1 << 21);
 }
 
 /**
@@ -54,7 +56,7 @@ void gpio_output_low(void)
  */
 void gpio_output_hight(void)
 {
-    GPIO1_DR |= (0x1 << 8);
+    GPIO4->DR |= (1 << 21);
 }
 
 /**
@@ -80,9 +82,9 @@ void delay(volatile unsigned int n)
 }
 
 /**
- * myapp() - 主函数
+ * app() - 主函数
  */
-void myapp(void)
+void app(void)
 {
     clk_enable();   /* 外设时钟使能 */
     gpio_init();    /* GPIO初始化 */
