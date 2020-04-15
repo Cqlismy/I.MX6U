@@ -10,7 +10,9 @@
 int main(void)
 {
     int key_value = KEY_NONE;
-    unsigned char led_state = OFF;
+    int cnt = 0;
+    unsigned char led1_state = OFF;
+    unsigned char led2_state = OFF;
 
     clk_enable();   /* 外设时钟使能 */
     led_init();     /* LED灯初始化 */
@@ -19,10 +21,18 @@ int main(void)
     while (1) {
         key_value = key_get_value();  /* 获取按键状态 */
         if (key_value == KEY0_VALUE) {
-            led_state = !led_state;
-            led_switch(led_state);
+            led1_state = !led1_state;
+            led_switch(LED2, led1_state);
             key_value = KEY_NONE;
         }
+
+        cnt++;
+        if (cnt == 100) {   /* LED灯提示系统在运行 */
+            led2_state = !led2_state;
+            led_switch(LED1, led2_state);
+            cnt = 0;
+        }
+
         delay(10);
     }
 

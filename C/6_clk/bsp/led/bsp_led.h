@@ -4,10 +4,15 @@
 #include "imx6ul.h"
 #include "bsp_gpio.h"
 
-#define ON      1
-#define OFF     0
+/* LED灯号 */
+#define LED1    0
+#define LED2    1
+
+/* LED灯的开关状态 */
+#define OFF      0
+#define ON       1
 
 void led_init(void);
-void led_switch(int status);
+void led_switch(unsigned char led, unsigned char status);
 
 #endif
