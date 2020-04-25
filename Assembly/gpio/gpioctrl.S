@@ -31,14 +31,16 @@ ldr r1, =0x5    /* 设置IO引脚复用模式为GPIO1_IO08 */
 str r1,[r0]
 
 /* 3、配置GPIO1_IO08引脚电气属性 
- * bit [16]: 0 关闭HYS
- * bit [15:14]: 00 默认下拉
- * bit [13]: 0 keeper
- * bit [12]: 1 pull/keeper使能
- * bit [11]: 0 禁止开路输出
- * bit [7:6]: 10 速度为100MHz
- * bit [5:3]: 110 驱动能力为R0/6
- * bit [0]: 0 低摆率
+ * bit[16]: 0 关闭HYS
+ * bit[15:14]: 00 默认下拉
+ * bit[13]: 0 keeper
+ * bit[12]: 1 pull/keeper使能
+ * bit[11]: 0 禁止开路输出
+ * bit[10:8]: 000 reserved
+ * bit[7:6]: 10 速度为100MHz
+ * bit[5:3]: 110 驱动能力为R0/6
+ * bit[2:1]: 00 reserved
+ * bit[0]: 0 低摆率
  */
 ldr r0, =0x020e0308   /* 将寄存器IOMUXC_SW_PAD_CTL_PAD_GPIO1_IO08写入r0 */
 ldr r1, =0x10b0 /* 设置GPIO1_IO08引脚电气属性 */
