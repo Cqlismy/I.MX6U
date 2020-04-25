@@ -7,8 +7,8 @@
  */
 int main(void)
 {
-    clk_enable();   /* 外设时钟使能 */
-    gpio_init();    /* GPIO初始化 */
+    system_clk_enable();    /* 外设时钟使能 */
+    gpio_init();            /* GPIO初始化 */
 
     while (1) {
         gpio_output(hight);

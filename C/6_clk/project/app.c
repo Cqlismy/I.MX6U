@@ -14,10 +14,10 @@ int main(void)
     unsigned char led1_state = OFF;
     unsigned char led2_state = OFF;
 
-    imx6ul_clk_init();  /* 初始化相关时钟 */
-    clk_enable();       /* 外设时钟使能 */
-    led_init();         /* LED灯初始化 */
-    key_init();         /* 按键初始化 */
+    imx6ul_clk_init();          /* 初始化相关时钟 */
+    system_clk_enable();        /* 外设时钟使能 */
+    led_init();                 /* LED灯初始化 */
+    key_init();                 /* 按键初始化 */
 
     while (1) {
         key_value = key_get_value();  /* 获取按键状态 */

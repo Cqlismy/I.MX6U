@@ -12,7 +12,7 @@ int main(void)
     int key_value = KEY_NONE;
     unsigned char led_state = OFF;
 
-    clk_enable();   /* 外设时钟使能 */
+    system_clk_enable();   /* 外设时钟使能 */
     led_init();     /* LED灯初始化 */
     key_init();     /* 按键初始化 */
 

@@ -3,9 +3,12 @@
 #include "MCIMX6G2.h"
 
 /**
- * clk_enable() - 使能SoC上所有外设时钟 
+ * system_clk_enable() - 使能SoC上所有外设时钟
+ * 
+ * @param: 无
+ * @return: 无
  */
-void clk_enable(void)
+void system_clk_enable(void)
 {
     CCM->CCGR0 = 0xffffffff;
     CCM->CCGR1 = 0xffffffff;
@@ -17,22 +20,28 @@ void clk_enable(void)
 }
 
 /**
- * gpio_init() - 初始化控制的GPIO 
+ * gpio_init() - 初始化控制的GPIO
+ * 
+ * @param: 无
+ * @return: 无
  */
 void gpio_init(void)
 {
     /* 设置CSI_DATA00引脚IO复用为GPIO4_IO21 */
     IOMUXC_SetPinMux(IOMUXC_CSI_DATA00_GPIO4_IO21, 0);
 
-    /* 配置GPIO4_IO21引脚电气属性 
-     * bit [16]: 0 关闭HYS
-     * bit [15:14]: 00 默认下拉
-     * bit [13]: 0 keeper
-     * bit [12]: 1 pull/keeper使能
-     * bit [11]: 0 禁止开路输出
-     * bit [7:6]: 10 速度为100MHz
-     * bit [5:3]: 110 驱动能力为R0/6
-     * bit [0]: 0 低摆率
+    /**
+     * 配置GPIO4_IO21引脚电气属性 
+     * bit[16]: 0 关闭HYS
+     * bit[15:14]: 00 默认下拉
+     * bit[13]: 0 keeper
+     * bit[12]: 1 pull/keeper使能
+     * bit[11]: 0 禁止开路输出
+     * bit[10:8]: 000 reserved
+     * bit[7:6]: 10 速度为100MHz
+     * bit[5:3]: 110 驱动能力为R0/6
+     * bit[2:1]: 00 reserved
+     * bit[0]: 0 低摆率
      */
     IOMUXC_SetPinConfig(IOMUXC_CSI_DATA00_GPIO4_IO21, 0x10b0);
 
@@ -44,7 +53,10 @@ void gpio_init(void)
 }
 
 /**
- * gpio_output_low() - GPIO1_IO08输出低电平 
+ * gpio_output_low() - GPIO1_IO08输出低电平
+ * 
+ * @param: 无
+ * @return: 无
  */
 void gpio_output_low(void)
 {
@@ -52,7 +64,10 @@ void gpio_output_low(void)
 }
 
 /**
- * gpio_output_hight() - GPIO1_IO08输出高电平 
+ * gpio_output_hight() - GPIO1_IO08输出高电平
+ * 
+ * @param: 无
+ * @return: 无
  */
 void gpio_output_hight(void)
 {
@@ -63,6 +78,8 @@ void gpio_output_hight(void)
  * delay_short() - 短时间延时函数
  * 
  * @n: 要循环的次数
+ * 
+ * @return: 无
  */
 void delay_short(volatile unsigned int n)
 {
@@ -73,6 +90,8 @@ void delay_short(volatile unsigned int n)
  * delay() - 延时函数，SoC在396MHz大概延时1ms
  * 
  * @n: 要延时的ms数
+ * 
+ * @return: 无
  */
 void delay(volatile unsigned int n)
 {
@@ -86,7 +105,7 @@ void delay(volatile unsigned int n)
  */
 void app(void)
 {
-    clk_enable();   /* 外设时钟使能 */
+    system_clk_enable();   /* 外设时钟使能 */
     gpio_init();    /* GPIO初始化 */
 
     while (1) {

@@ -3,7 +3,7 @@
 
 #include "imx6ul.h"
 
-void clk_enable(void);
+void system_clk_enable(void);
 void imx6ul_clk_init(void);
 
 #endif

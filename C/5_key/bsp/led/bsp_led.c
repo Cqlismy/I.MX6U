@@ -12,7 +12,8 @@ void led_init(void)
     /* 设置CSI_DATA00引脚IO复用模式为GPIO4_IO21 */
     IOMUXC_SetPinMux(IOMUXC_CSI_DATA00_GPIO4_IO21, 0);
 
-    /* 配置GPIO4_IO21引脚电气属性 
+    /**
+     * 配置GPIO4_IO21引脚电气属性 
      * bit [16]: 0 关闭HYS
      * bit [15:14]: 00 默认下拉
      * bit [13]: 0 keeper
@@ -32,6 +33,7 @@ void led_init(void)
 
 /**
  * led_switch() - LED灯状态设置
+ * 
  * @status: ON->打开LED灯，OFF->关闭LED灯
  * 
  * @return: 无

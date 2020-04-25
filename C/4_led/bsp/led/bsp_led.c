@@ -2,21 +2,27 @@
 
 /**
  * led_init() - 初始化控制的LED灯
+ * 
+ * @param: 无
+ * @return: 无
  */
 void led_init(void)
 {
     /* 设置IO口复用模式为GPIO */
     IOMUXC_SetPinMux(IOMUXC_CSI_DATA00_GPIO4_IO21, 0);
 
-    /* 配置GPIO4_IO21引脚电气属性 
-     * bit [16]: 0 关闭HYS
-     * bit [15:14]: 00 默认下拉
-     * bit [13]: 0 keeper
-     * bit [12]: 1 pull/keeper使能
-     * bit [11]: 0 禁止开路输出
-     * bit [7:6]: 10 速度为100MHz
-     * bit [5:3]: 110 驱动能力为R0/6
-     * bit [0]: 0 低摆率
+    /**
+     * 配置GPIO4_IO21引脚电气属性 
+     * bit[16]: 0 关闭HYS
+     * bit[15:14]: 00 默认下拉
+     * bit[13]: 0 keeper
+     * bit[12]: 1 pull/keeper使能
+     * bit[11]: 0 禁止开路输出
+     * bit[10:8]: reserved
+     * bit[7:6]: 10 速度为100MHz
+     * bit[5:3]: 110 驱动能力为R0/6
+     * bit[2:1]: reserved
+     * bit[0]: 0 低摆率
      */
     IOMUXC_SetPinConfig(IOMUXC_CSI_DATA00_GPIO4_IO21, 0x10b0);
 
@@ -28,9 +34,11 @@ void led_init(void)
 }
 
 /**
- * gpio_output() - 控制LED灯的亮灭
+ * led_output() - 控制LED灯的亮灭
  * 
- * @status: LED_ON为点亮，LED_OFF为熄灭 
+ * @status: LED_ON为点亮，LED_OFF为熄灭
+ * 
+ * @return: 无
  */
 void led_output(int status)
 {

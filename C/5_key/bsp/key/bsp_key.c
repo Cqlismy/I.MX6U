@@ -12,21 +12,24 @@ void key_init(void)
     /* 设置CSI_DATA01引脚IO复用为GPIO4_IO22 */
     IOMUXC_SetPinMux(IOMUXC_CSI_DATA01_GPIO4_IO22, 0);
 
-    /* 配置GPIO4_IO22引脚电气属性 
-     * bit [16]: 0 关闭HYS
-     * bit [15:14]: 11 pull up 22k
-     * bit [13]: 1 pull
-     * bit [12]: 1 pull/keeper使能
-     * bit [11]: 0 禁止开路输出
-     * bit [10:8] 000 reserved
-     * bit [7:6]: 10 速度为100MHz
-     * bit [5:3]: 000 关闭输出
-     * bit [0]: 0 低摆率
+    /**
+     * 配置GPIO4_IO22引脚电气属性 
+     * bit[16]: 0 关闭HYS
+     * bit[15:14]: 11 pull up 22k
+     * bit[13]: 1 pull
+     * bit[12]: 1 pull/keeper使能
+     * bit[11]: 0 禁止开路输出
+     * bit[10:8] 000 reserved
+     * bit[7:6]: 10 速度为100MHz
+     * bit[5:3]: 000 关闭输出
+     * bit[2:1]: 00 reserved
+     * bit[0]: 0 低摆率
      */
     IOMUXC_SetPinConfig(IOMUXC_CSI_DATA01_GPIO4_IO22, 0xF080);
 
     /* 将按键相关的GPIO方向设置为输入 */
     key_config.direction = kGPIO_DigitalInput;
+    key_config.value = 1;
     gpio_init(GPIO4, 22, &key_config);
 }
 

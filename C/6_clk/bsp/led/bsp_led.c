@@ -15,15 +15,18 @@ void led_init(void)
     /* 设置CSI_DATA01引脚IO复用为GPIO4_IO22(LED2) */
     IOMUXC_SetPinMux(IOMUXC_CSI_DATA01_GPIO4_IO22, 0);
 
-    /* 配置GPIO4_IO21和GPIO4_IO22引脚电气属性 
-     * bit [16]: 0 关闭HYS
-     * bit [15:14]: 00 默认下拉
-     * bit [13]: 0 keeper
-     * bit [12]: 1 pull/keeper使能
-     * bit [11]: 0 禁止开路输出
-     * bit [7:6]: 10 速度为100MHz
-     * bit [5:3]: 110 驱动能力为R0/6
-     * bit [0]: 0 低摆率
+    /**
+     * 配置GPIO4_IO21和GPIO4_IO22引脚电气属性 
+     * bit[16]: 0 关闭HYS
+     * bit[15:14]: 00 默认下拉
+     * bit[13]: 0 keeper
+     * bit[12]: 1 pull/keeper使能
+     * bit[11]: 0 禁止开路输出
+     * bit[10:8]: reserved
+     * bit[7:6]: 10 速度为100MHz
+     * bit[5:3]: 110 驱动能力为R0/6
+     * bit[2:1]: reserved
+     * bit[0]: 0 低摆率
      */
     IOMUXC_SetPinConfig(IOMUXC_CSI_DATA00_GPIO4_IO21, 0x10b0);
     IOMUXC_SetPinConfig(IOMUXC_CSI_DATA01_GPIO4_IO22, 0x10b0);

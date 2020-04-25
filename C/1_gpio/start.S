@@ -1,6 +1,6 @@
 .global _start
 
-/*
+/**
  *  _start函数，程序先在这开始执行，用来设置C语言运行环境
  */
 _start:

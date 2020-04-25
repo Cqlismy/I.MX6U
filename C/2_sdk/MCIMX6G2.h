@@ -69,7 +69,7 @@
 #ifndef _MCIMX6G2_H_
 #define _MCIMX6G2_H_                             /**< Symbol preventing repeated inclusion */
 
-#include "cc.h"
+#include "types.h"
 
 /** Memory map major version (memory maps with equal major version number are
  * compatible) */

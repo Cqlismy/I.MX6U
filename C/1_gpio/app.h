@@ -1,7 +1,7 @@
 #ifndef __APP_H
 #define __APP_H
 
-/*
+/**
  *  SoC中CCM_CCGR寄存器地址
  */
 #define CCM_CCGR0   *((volatile unsigned int *)0x020c4068)
@@ -12,13 +12,13 @@
 #define CCM_CCGR5   *((volatile unsigned int *)0x020c407c)
 #define CCM_CCGR6   *((volatile unsigned int *)0x020c4080)
 
-/*
+/**
  *  SoC中IOMUXC中CSI_DATA00引脚复用配置寄存器地址
  */
 #define SW_MUX_CTL_PAD_CSI_DATA00   *((volatile unsigned int *)0x020e01e4)
 #define SW_PAD_CTL_PAD_CSI_DATA00   *((volatile unsigned int *)0x020e0470)
 
-/*
+/**
  *  SoC中GPIO4寄存器相关地址
  */
 #define GPIO4_DR        *((volatile unsigned int *)0x020a8000)
