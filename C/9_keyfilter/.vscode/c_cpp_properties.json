@@ -1,0 +1,31 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/imx6ul",
+                "${workspaceFolder}/bsp/clk",
+                "${workspaceFolder}/bsp/delay",
+                "${workspaceFolder}/bsp/gpio",
+                "${workspaceFolder}/bsp/key",
+                "${workspaceFolder}/bsp/led",
+                "${workspaceFolder}/bsp/int",
+                "${workspaceFolder}/bsp/exit",
+                "${workspaceFolder}/bsp/epit",
+                "${workspaceFolder}/bsp/keyfilter"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.14393.0",
+            "compilerPath": "H:/VS2015/VC/bin/cl.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "msvc-x64"
+        }
+    ],
+    "version": 4
+}
